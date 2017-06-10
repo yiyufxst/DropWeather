@@ -52,9 +52,9 @@
         </android.support.v4.widget.SwipeRefreshLayout>
 
         <fragment
-            android:id="@+id/choose_area_fragment"
-            android:name="com.dropweather.android.ChooseAreaFragment"
-            android:layout_width="match_parent"
+            android:id="@+id/menu"
+            android:name="com.dropweather.android.MenuFragment"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="start"
             />
