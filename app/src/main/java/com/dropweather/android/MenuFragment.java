@@ -1,5 +1,6 @@
 package com.dropweather.android;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.media.Image;
@@ -8,10 +9,12 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,11 +28,13 @@ import java.util.Map;
 public class MenuFragment extends Fragment {
 
     private int[] icons = {R.drawable.ic_city, R.drawable.ic_switch,
-        R.drawable.ic_help, R.drawable.ic_info};
+        R.drawable.ic_help, R.drawable.ic_advice, R.drawable.ic_info};
 
-    private String[] names = {"城市管理", "切换城市", "帮助", "关于"};
+    private String[] names = {"城市管理", "切换城市", "帮助", "反馈", "关于"};
 
     private ListView listView;
+
+    private Intent intent;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -49,5 +54,40 @@ public class MenuFragment extends Fragment {
         listView = (ListView) view.findViewById(R.id.list_view);
         listView.setAdapter(adapter);
         return view;
+    }
+
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                switch (position) {
+                    case 1:
+                        intent = new Intent(getActivity(), ChooseAreaActivity.class);
+                        startActivity(intent);
+                        getActivity().finish();
+                        break;
+                    case 2:
+                        intent = new Intent(getActivity(), HelpActivity.class);
+                        startActivity(intent);
+                        getActivity().finish();
+                        break;
+                    case 3:
+                        intent = new Intent(getActivity(), AdviceActivity.class);
+                        startActivity(intent);
+                        getActivity().finish();
+                        break;
+                    case 4:
+                        intent = new Intent(getActivity(), InfoActivity.class);
+                        startActivity(intent);
+                        getActivity().finish();
+                        break;
+
+                    default:
+                        break;
+                }
+            }
+        });
     }
 }
