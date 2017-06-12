@@ -29,6 +29,8 @@ import com.dropweather.android.util.HttpUtil;
 import com.dropweather.android.util.Utility;
 
 import java.io.IOException;
+import java.util.HashSet;
+import java.util.Set;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -128,6 +130,7 @@ public class WeatherActivity extends AppCompatActivity {
             @Override
             public void onRefresh() {
                 requestWeather(mWeatherId);
+                loadBingPic();
             }
         });
 
@@ -166,6 +169,10 @@ public class WeatherActivity extends AppCompatActivity {
                     public void run() {
                         if (weather != null && "ok".equals(weather.status)) {
                             SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(WeatherActivity.this).edit();
+                            Set weatherIds = PreferenceManager.getDefaultSharedPreferences(WeatherActivity.this).getStringSet("weatherIds", new HashSet());
+                            weatherIds.add(weatherId);
+                            editor.putStringSet("weatherIds", weatherIds);
+                            Log.d("test", weatherIds.toString());
                             editor.putString("weather", responseText);
                             editor.apply();
                             showWeatherInfo(weather);
@@ -229,8 +236,12 @@ public class WeatherActivity extends AppCompatActivity {
         carWashText.setText(carWash);
         sportText.setText(sport);
         weatherLayout.setVisibility(View.VISIBLE);
-        Intent intent = new Intent(this, AutoUpdateService.class);
-        startService(intent);
+        if (weather != null && "ok".equals(weather.status)) {
+            Intent intent = new Intent(this, AutoUpdateService.class);
+            startService(intent);
+        } else {
+            Toast.makeText(WeatherActivity.this, "获取天气信息失败", Toast.LENGTH_SHORT).show();
+        }
     }
 
     /**

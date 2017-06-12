@@ -3,6 +3,7 @@ package com.dropweather.android;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
+import android.hardware.Camera;
 import android.media.Image;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -63,6 +64,11 @@ public class MenuFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 switch (position) {
+                    case 0:
+                        intent = new Intent(getActivity(), AreaManagementActivity.class);
+                        startActivity(intent);
+                        getActivity().finish();
+                        break;
                     case 1:
                         intent = new Intent(getActivity(), ChooseAreaActivity.class);
                         startActivity(intent);
@@ -82,9 +88,6 @@ public class MenuFragment extends Fragment {
                         intent = new Intent(getActivity(), InfoActivity.class);
                         startActivity(intent);
                         getActivity().finish();
-                        break;
-
-                    default:
                         break;
                 }
             }

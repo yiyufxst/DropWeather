@@ -21,6 +21,7 @@
         <activity android:name=".WeatherActivity"/>
         <activity android:name=".AddAreaActivity"/>
         <activity android:name=".ChooseAreaActivity"/>
+        <activity android:name=".AreaManagementActivity"/>
         <activity android:name=".HelpActivity">
         </activity>
         <activity android:name=".AdviceActivity">
