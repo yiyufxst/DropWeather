@@ -24,7 +24,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="Drop天气->反馈"
+            android:text="我要反馈"
             android:textColor="#fff"
             android:textSize="20sp"/>
     </RelativeLayout>
